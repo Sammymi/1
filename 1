@@ -1,0 +1,588 @@
+<?php setcookie("pex", $_GET["pex"], time()+60*60*24); ?>
+ <!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '<?=$_GET["pex"]?>');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=744561600274655&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+<?php
+    if(!empty($_POST) && strlen($_POST['name']) > 1 && strlen($_POST['phone']) > 5)
+    {
+      
+      //Lucky.online Api-Key
+    $api="5d40355ca793e016461185587036";
+    
+    //ключ потока CRM
+    $crm_stream_key="";
+    
+    //ГЕО прим. sub4
+    $country = "PT";
+    
+    //Для переводов
+    $redir_country = "pt";
+    
+    //Campaign Hash Lucky.online
+    $hash = "267e72c4-bee6-46fb-874d-c6ff334992c5";
+    
+    //Разбор метки
+    $utm_source = $_GET['utm_source'];
+    
+    list($sub1, $sub2, $sub3, $sub4) = explode("_", $utm_source);
+    
+        $post = [
+            $params = array(
+        'campaign_hash' => $hash,
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+        'ip' => $_SERVER['REMOTE_ADDR'],
+        'phone' => $_POST['phone'],
+        'name' => $_POST['name'],
+        'country' => $country, 
+        'subid1' => $sub1, //основная метка
+        'subid2' => $sub2, //добавочная метка
+        'subid3' => $sub3, //добавочная метка
+        'subid4' => $sub4, //добавочная метка
+        'utm_source' => $crm_stream_key, //ключ потока CRM
+        'utm_term' => $_POST['subid'], //Subid трекера
+        'subid' => $_POST['subid'],
+        )
+        ];
+      
+
+        $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://lucky.online/api/v1/lead-create/webmaster?api_key={$api}");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+    $return = curl_exec($ch);
+    curl_close($ch);
+    $array = json_decode($return, true);
+        
+        // keitaro lead
+        file_get_contents('http://localhost/cbbc26b/postback?status=lead&subid=' . urlencode($_POST['subid']). '&extra_param_1='.urlencode($_SERVER['REMOTE_ADDR']).'&extra_param_2='.urlencode($_POST['name']).'&extra_param_3='.urlencode($_POST['phone']));
+        
+        header('Location: /success.php?lang='.$redir_country.'&pex='.$_GET['pex']);//.'&gcid='.$_GET['gcid'].'&ghs='.$_GET['ghs']); 
+  }
+    
+    $form_action = "?".http_build_query($_GET);
+    
+?>
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Há apenas 9 semanas atrás ela não cabia em fatos de treino XXL e a sua barriga gorda levava-a às lágrimas. Hoje ela tem 30 kg a menos e tem um ótimo aspeto em leggings de tamanho M.</title>
+        <link rel="stylesheet" href="src/style.css">
+        <link rel="stylesheet" href="src/generator.css">
+        <link rel="stylesheet" href="src/doors.css">
+        <link rel="stylesheet" href="src/form.css">
+        <link rel="stylesheet" href="src/preloader.css">
+
+        <script>
+
+            const siteProduct = {
+                name: "Reduslim",
+                demonPopup: true,
+
+            };
+        </script>
+
+    </head>
+    <body id="article-adtredo">
+        <nav class="nav">
+            <div class="nav-wrapper container">
+                <div class="logo"><img src="src/logoc5453e1b8d7e0.png" alt="Área da saúde" class="to_form" style="cursor: pointer"> <span class="logo-text to_form"  style="cursor: pointer">Área da<br><span>saúde</span></span></div>
+                <ul class="nav-list d-none d-md-flex">
+                    <li><a href="#form-main"><strong>Notícias</strong></a></li>
+                    <li><a href="#form-main">Eventos</a></li>
+                    <li><a href="#form-main">Inovações</a></li>
+                    <li><a href="#form-main">Conferências</a></li>
+                    <li><a href="#form-main">Do ponto de vista de um especialista</a></li>
+                </ul>
+                <div class="menu-icon d-md-none"><img src="src/menubc9bd72aa931c.svg" alt="Menu" class="to_form" style="cursor: pointer"></div>
+            </div>
+        </nav>
+        <div class="background-top-box">
+            <div class="background-top"></div>
+        </div>
+        <div class="top-badges container">
+            <div class="news">Notícias do dia</div>
+            <div class="top-social-icons"><a href="#form-main"><img src="src/instagramdfdf8210.png" alt="Instagram"></a><a href="#form-main"><img src="src/pinterest2fe2e7e4.png" alt="Pinterest"></a></div>
+        </div>
+        <div class="container row row-justify-between">
+            <main class="main">
+                <h1 class="main-title">Há apenas 9 semanas atrás, ela não cabia em agasalhos XXL e sua barriga gorda a levou às lágrimas. Hoje ela tem 30 kg a menos e tem um ótimo aspeto em leggings de tamanho M.</h1>
+                <img src="src/top27985a425596aa.png" alt="Konferencja" class="img-fluid top-image">
+                <div class="white-background">
+                    <p class="small-title">Há apenas seis meses, a vida de Madalena de Braga, de 42 anos, era um drama. Primeiro teve de deixar o seu trabalho, depois o seu marido deixou-a por uma amante. Com excesso de peso de 30 kg, começou a ter problemas de caminhada e palpitações cardíacas. O avanço para ela veio sob a forma de testes inovadores. Madalena passou por uma transformação sensacional: ganhou uma figura escultural e recuperou a sua feminilidade.</p>
+                    <h2 class="article-title">Os gordos têm uma vida dura</h2>
+                    <p class="normal-text">Falar com Madalena dói e limpa ao mesmo tempo. Durante anos, a mulher para quem todos olham na rua sentia-se invisível:</p>
+                    <p class="before-photo">Já na escola fui apelidada de "gorda". As colegas de turma por vezes falavam comigo por piedade. Os colegas mantinham distância. Nas festas eu apoiava as paredes. Durante a puberdade e na universidade, os quilos aumentaram ainda mais. Aos 21 anos, estava a usar as roupas da minha mãe de 52 anos. Não havia qualquer hipótese de ficar bem nos tops da moda da altura ou nas calças. Além disso, não havia artigos em redes de lojas populares do meu tamanho. As pessoas me tratavam com condescendência. Eles pensavam que eu era gulosa e preguiçosa. Permitiam-se fazer observações pouco lisonjeiras. Numa pastelaria uma vez ouvi: "oh, isso provavelmente não é para si!". E eu estava apenas a comprar bolos para o dia do onomástico da minha avó. Outra vez alguém disse: "tem uma cara bonita, seria bastante bonita se perdesse peso". Tais 'conselhos' e a minha aparência levavam-me às lágrimas.</p>
+                    <div class="photo-box">
+                        <img src="src/young5d9598be2361.png" alt="">
+                        <div class="photo-desc">Não tinha de ser uma beleza de biquíni, <span class="break">só não queria ser um quadrúpede gordo.</span></div>
+                    </div>
+                    <p class="normal-text">Para além dos complexos de peso, tive problemas cardíacos e articulares. Tornaram-me muito improdutiva no trabalho. Não conseguia levantar cargas, andar muito ou apressar-me e ficar stressada. O meu patrão olhava-me com desprezo. Um dia, chamou-me ao seu gabinete. Ele disse que eu era um fardo para a equipa e... entregou o meu aviso. Gorda, doente e indesejada - era o que eu pensava de mim mesma. Infelizmente, descobri que eu não era o única...</p>
+                    <p class="normal-text">Para piorar a situação, a minha vida privada também estava um caos. O meu marido declarou que estava farto da "minha fragilidade e da minha atitude de autopiedade". No entanto, isto foi apenas uma desculpa. Ele estava simplesmente enojado de mim. Há muito tempo que não existia intimidade física entre nós. Suspeitava que ele estava a ter um caso com uma colega de trabalho. Foi confirmado quando ele fez as suas malas e partiu para ela.</p>
+                    <h2 class="article-title">„Dieta? Aptidão física? Sem efeito. Eu estava a ganhar peso do nada”</h2>
+                    <p class="before-photo">Madalena queria mostrar a si própria, ao seu ex e a todos os maus que podia perder peso e recuperar o controlo da sua vida. Em vão.</p>
+                    <div class="photo-box">
+                        <img src="src/jojo66bebbebfd6d3.png" alt="Efekt jojo">
+                        <div class="photo-desc reset-padding">
+                            <div class="photo-desc-half-box"><span>Depois de perder&nbsp;<br class="d-md-none">4 kg</span> <span>2 meses depois +&nbsp;16 kg</span></div>
+                        </div>
+                    </div>
+                    <p class="normal-text">A dieta de 1000 kcal, Diamond, mediterrânea, paleo - Devo ter testado todos os métodos de perda de peso existentes no mercado. O resultado era sempre o mesmo: perda de peso mínima, ocupada pela fome e pelo suor. E após alguns meses, um gigantesco efeito ioiô. Devido a problemas de saúde, já não conseguia fazer exercícios para perder esse peso. Eu estava aterrorizada. Até os fatos de treino XXL estavam a ranger pelas costuras em mim. Eu queria mesmo perder peso, mas o meu corpo não me deixava! Quanto mais eu tentava, mais quilos ganhava.</p>
+                    <h2 class="article-title">„Naquele dia, nasci de novo”</h2>
+                    <p class="normal-text">Perguntámos a Madalena como isto era possível: há apenas 9 semanas ela pesava 108 kg. Hoje ela impressiona com a sua figura esbelta, que ela ousadamente realça com trajes adaptados. Em leggings apertadas, ela chama a atenção mesmo de jovens de 20 anos. Aqui está a sua resposta:</p>
+                    <p class="normal-text">Provavelmente ainda estaria desesperada com a minha barriga gorda e coxas enormes se não fosse por uma mensagem de uma amiga terapeuta. Estavam a ser lançados pela primeira vez em Portugal testes inovadores sob a direção do conhecido especialista António Cerqueira. Tinha lido em vários fóruns pró-médicos que esta foi a primeira investigação do seu género sobre obesidade na Europa Central. Eu não tinha dúvidas: esta era a minha oportunidade!</p>
+                    <p class="before-photo">Decidi preencher o formulário de contacto. Esperei uma semana inteira por uma resposta até que finalmente chegasse:</p>
+                    <div class="photo-box photo-box-90">
+                        <img src="src/accepta11dd9e0099.png" alt="Akcptacja" class="space zoom">
+                        <div class="photo-desc">Fui qualificada para um programa especial para pessoas com excesso de peso</div>
+                    </div>
+                    <p class="normal-text">Depois de tantas tentativas infrutíferas, já devia estar desanimado, certo? Mas a minha intuição é normalmente infalível, e agora dizia-me que o Sr. António Cerqueira e a sua investigação mudariam a minha vida. Pela primeira vez, senti que o sucesso estava realmente perto. Eu poderia ser magra, bonita, feliz comigo mesma e... Quem sabe? Talvez amada também por um homem especial?</p>
+                    <h2 class="article-title">„Os quilos desapareciam todos os dias”</h2>
+                    <p class="normal-text">Quando questionada sobre os testes do Sr. Cerqueira, Madalena não conseguia conter a sua excitação.</p>
+                    <p class="before-photo">Para os testes, dividimo-nos em dois grupos - um deveria utilizar o novo tratamento todos os dias e o outro um placebo. Acabei no grupo nº 1. Mesmo agora tremo com a memória dos primeiros três dias no Instituto. Foi então que a minha barriga começou a aplanar e a baixar. Os rolos de gordura desapareceram das minhas costas. A primeira pesagem sob a supervisão dos técnicos de laboratório mostrou uma perda de peso de 2 kg! A cada dia que passava, ficava cada vez melhor. A cintura e as coxas perderam centímetros. A pele das minhas nádegas deixou de ser esponjosa e apertou-se elegantemente. Curiosamente, também ganhei muita energia. Levantava-me de manhã, fresca e alegre, cheia de otimismo. Eu estava em todo o lado. E tudo isto sem qualquer exercício e com as mesmas refeições de sempre!</p>
+                    <div class="photo-box photo-box-100">
+                        <img src="src/duringb80b23e61e9.png" alt="Aqui estou eu antes do tratamento e 7 semanas após o seu início">
+                        <div class="photo-desc">Aqui estou eu antes do tratamento e 7 semanas após o seu início</div>
+                    </div>
+                    <p class="normal-text">No final, durante estas 9 semanas, perdi... 30 kg! Não me reconheci a mim mesma. A roupa com que vim para os testes caia de mim. Agora podia usar as t-shirts que costumava usar como vestidos... oversize! As pessoas também começaram a tratar-me de forma diferente. Na rua estava a apanhar olhares curiosos, nas lojas estava a receber elogios pela minha aparência. „Tudo se encaixa bem numa figura tão magra” - as senhoras comentavam quando experimentava calças apertadas. Finalmente estava a viver sem vergonha e tristeza.</p>
+                    <h2 class="article-title">Madalena sofreu uma transformação colossal em apenas sete semanas. Onde está o segredo do sucesso?</h2>
+                    <p class="before-photo">O método que permitiu que Madalena se livrasse sem esforço do excesso de peso revelou-se um tratamento que acelera naturalmente o metabolismo. Os seus ingredientes são descritos pela comunidade científica como „domadores de gordura à base de plantas”.</p>
+                    <h2 class="article-title">5 benefícios imediatos para a sua figura!</h2>
+                    <div class="weeks-list">
+                        <div class="weeks-list_el">
+                            <img src="src/check1d45f7c7dc05.png" alt="" class="check"> <span class="nr">1</span>
+                            <p class="normal-text">Até 30 kg de peso a menos em 9 semanas</p>
+                        </div>
+                        <div class="weeks-list_el">
+                            <img src="src/check244516b68bdd.png" alt="" class="check"> <span class="nr">2</span>
+                            <p class="normal-text">Eliminação de celulite gorda, aquosa e mista</p>
+                        </div>
+                        <div class="weeks-list_el">
+                            <img src="src/check308698d983ee.png" alt="" class="check"> <span class="nr">3</span>
+                            <p class="normal-text">Emagrecimento da barriga, coxas, nádegas e braços</p>
+                        </div>
+                        <div class="weeks-list_el">
+                            <img src="src/check4417fa4f8582.png" alt="" class="check"> <span class="nr">4</span>
+                            <p class="normal-text">Equilíbrio do colesterol, mais energia para a vida</p>
+                        </div>
+                        <div class="weeks-list_el">
+                            <img src="src/check5b47c54475f8.png" alt="" class="check"> <span class="nr">5</span>
+                            <p class="normal-text">Peso correto sem esforço desnecessário e efeito ioiô</p>
+                        </div>
+                    </div>
+                    <p class="normal-text">A ação do tratamento é explicada pelo chefe da investigação sobre perda de peso e especialista de renome internacional, António Cerqueira:</p>
+                    <div class="expert-box">
+                        <img src="src/expert5e5ec90cacc.png" alt="Jeffrey Moore">
+                        <p class="expert-opinion">A mistura natural à base de plantas acelera o metabolismo 12 vezes e acelera a decomposição do tecido adiposo. Especialmente aquela acumulada em áreas tão resistentes como a barriga, as coxas ou... o queixo. Em apenas 25 horas, os ingredientes ativos começam a animar as nossas células para queimar calorias mais rapidamente. Ao mesmo tempo, limpam o corpo de toxinas e produtos metabólicos desnecessários. Isto é particularmente importante porque o corpo já não está a gastar energia valiosa para lidar com os efeitos do envenenamento interno. Isto significa que o inchaço e a celulite desaparecem juntamente com o excesso de peso. O bem-estar físico e mental melhora. Na minha opinião, há um avanço absoluto no campo do combate ao excesso de peso persistente e da prevenção da obesidade.</p>
+                    </div>
+                    <h2 class="article-title">Funciona para todos</h2>
+                    <p class="before-photo">O tratamento Reduslim contém até 6 extratos de alta qualidade, com a mais alta biodisponibilidade possível. O efeito da fórmula é multifacetado: Acelera a queima de gordura em 12 vezes, elimina a estagnação da água e linfática e previne permanentemente o efeito ioiô. Este é exatamente o efeito desta fórmula que podemos observar em Madalena. A sua bela figura persiste até aos dias de hoje. Mesmo muitos meses após o fim da terapia.</p>
+                    <div class="photo-box">
+                        <img src="src/proof-1f343735056.png" alt="Alexandra de Faro perdeu 29 kg em 3 meses">
+                        <div class="photo-desc">Alexandra de Faro perdeu 29 kg em 3 meses</div>
+                    </div>
+                    <div class="photo-box">
+                        <img src="src/proof-24381ddbede.png" alt="Bárbara do Porto perdeu 56 kg em 7 meses">
+                        <div class="photo-desc">Bárbara do Porto perdeu 56 kg em 7 meses</div>
+                    </div>
+                    <div class="photo-box">
+                        <img src="src/proof-33831e78203.png" alt="Inés do Viseu perdeu 12 kg em 1,5 meses">
+                        <div class="photo-desc">Inés do Viseu perdeu 12 kg em 1,5 meses</div>
+                    </div>
+                    <div class="photo-box">
+                        <img src="src/proof-49126f5c26b.png" alt="Elisa de Guimarães perdeu 42 kg em 3 meses">
+                        <div class="photo-desc">Elisa de Guimarães perdeu 42 kg em 3.5 meses</div>
+                    </div>
+                    <p class="normal-text">Estudos clínicos sob a liderança de António Cerqueira confirmam: o tratamento Reduslim irá transformar cada célula do seu corpo numa fábrica ultra-eficiente para queimar gordura indesejada. Nenhuma das calorias que consome será depositada na sua barriga ou nas ancas. Mesmo que goste de lanchar depois das 18 horas ou tenha uma fraqueza por produtos ricos em açúcares complexos, tais como doces ou pão branco. Esta fórmula foi criada para tarefas especiais. Quanto maior for o seu problema, mais eficaz ele é. Pode ganhar o peso que quiser no mesmo espaço de tempo que Madalena ou... ainda mais rápido. Mesmo que esteja a lutar contra a obesidade abdominal e todos os métodos anteriores lhe tenham falhado.</p>
+                    <h2 class="article-title">Ponha um fim às dietas que não fazem mais do que prejudicar. Com o Reduslim finalmente perderá peso em vez de emagrecer</h2>
+                    <p class="normal-text">Passar fome, dietas de "limpeza", cintos de emagrecimento, lavagens intestinais. Sabe muito bem que com tais invenções se pode perder tempo, dinheiro, saúde... Tudo menos os quilos! Estes voltarão de forma fiável e numa massa redobrada. Está a ler isto e a sentir-se como se estivesse a chorar? Tem partes do corpo que odeia e não quer ver? Está na hora de pôr um fim a isto! O seu corpo é belo em cada centímetro e merece ser saudável, forte e... bem formado! Sem gastar uma fortuna, sem se encher de males, sem se submeter a tratamentos arriscados. Neste momento, está a dar o primeiro passo para a sua bela transformação.</p>
+                    <p class="normal-text">Especialmente para os nossos leitores, juntamente com António Cerqueira preparámos um desconto atrativo. Está disponível a todos os que decidam adquirir a inovadora fórmula Reduslim. Se quiser experimentar o método de que toda a comunidade científica está a falar, tem de agir rapidamente!</p>
+                    <p class="before-last-photo">Basta entrar no sorteio abaixo   para ter a certeza de obter o desconto! Além disso, também terá acesso a recursos detalhados e análises sobre como o produto funciona.</p>
+                    <div class="last-photos">
+                        <img src="src/last-photo8116f2c.png" alt="">
+                        <!--<div class="last-photo-product"><img src="src/product.png" alt="Apetin Stop !"></div>-->
+                    </div>
+                    <div id="form-main" > </div>
+                    <span id="goToForm"></span>
+                    <div id="form-block">
+                        <h3 class="door__head">Participe no sorteio e ganhe desconto na compra de Reduslim de até 50%.</h3>
+                        <div class="door__wrapper">
+                            <h2 class="door__title">Adivinhe QUAL PORTA TEM 50% DE DESCONTO</h2>
+                            <div class="door__container">
+                                <div class="door_box">
+                                    <div class="hi">
+                                        <p id="door__sales2" class="door__sales "></p>
+                                    </div>
+                                    <div id="door__2" class="door">
+                                    </div>
+                                </div>
+                                <div class="door_box">
+                                    <div class="hi">
+                                        <p id="door__sales1" class="door__sales "></p>
+                                    </div>
+                                    <div id="door__1" class="door">
+                                    </div>
+                                </div>
+                                <div class="door_box">
+                                    <div class="hi">
+                                        <p id="door__sales3" class="door__sales "></p>
+                                    </div>
+                                    <div id="door__3" class="door">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="order">
+                            <!-- ДОБАВИТЬ ФОРМУ СЮДА -->
+                            <div class="prod_img_wrapper">
+                                <img src="src/product.png" class="prod_img" alt="img" width="300" loading="lazy">
+                                <div class="prix"> <span class="dis">Redução!</span> <s>
+                                     <span class="x_price_previous old_price_val">77</span>     <span class="x_currency old_price_cur">€</span></s><br>
+                                    <b class="inL_939597"> <span class="x_price_current new_price_val">39</span> <span class="x_currency new_price_cur">€</span></b> </div>
+                            </div>
+                            <br>
+                            <br>
+                            <p class="inL_634899" style="text-align: center;">  A promoção termina dia <script type="text/javascript">
+                var appendNull = function (num) {
+                    return num < 10 ? 0 + num.toString() : num;
+                };
+                d = new Date();
+                p = new Date(d.getTime() - 0 * 86400000);
+                monthb = '01,02,03,04,05,06,07,08,09,10,11,12'.split(',');
+                document.write(appendNull(p.getDate()) + '.' + monthb[p.getMonth()] + '.' + p.getFullYear());
+                </script></p>
+                            <h3 class="inL_355631"> A quantidade do produto é limitada, corra para encomendar antes que seja tarde!<br> Seu desconto expira em:<br><span class="time_remains" id="min"></span> : <span class="time_remains" id="sec"></span> </h3>
+                            <form action="<?php echo $form_action; ?>" class="order_form x_order_form" id="order_form" method="post">
+							 <label class="data_label">Lado</label>
+                                <select name="country" class="wheel_input"></select>
+                                <input type="hidden" name="country" value="PT">
+                <input type="hidden" name="pixel" value=""> 
+                <input type="hidden" name="subid" value="{subid}">
+                                <label class="data_label">Digite seu nome </label>
+                                <input class="wheel_input ym-record-keys" type="text" name="name" required="" autocomplete="disable" minlength="2" id="name" placeholder="Filipe Neves" >
+                                <label class="data_label">Digite seu número de telefone </label>
+                                <input class="wheel_input ym-record-keys" type="tel" id="phone" name="phone" autocomplete="disable" required="" minlength="8" maxlength="18" placeholder=" +351 211 338 207" >
+                                <button class="main-link" type="submit">ENCOMENDA Reduslim</button>
+                                <div class="ring-loading"></div>
+                                <p class="inL_868352" style="text-align: center;">* Trabalha em mercadorias dentro de um canal de distribuição</p>
+
+                            </form>
+                            <h2 class="time_remains_title inL_847578" style="font-size: 21px;">
+                                Atenção, a oferta é limitada e válida até
+                                <span class="time_remains date-0">
+                                    <script>
+                                        (() => {
+                                            document.write((new Date()).toLocaleDateString('es', {
+                                                "dateStyle": "short"
+                                            }))
+                                        })();
+                                    </script>
+                                </span>
+                            </h2>
+                            <div class="spin-result-wrapper">
+                                <div class="pop-up-window">
+                                    <div class="close-popup"></div>
+                                    <h1 class="popup-title">Parabéns!</h1>
+                                    <p class="ruletka-p pop-up-text">Pode receber Reduslim por <span class="danger-text"><span class="new_price_val"></span> <span class="new_price_cur">39 eur</span>!</span></p>
+                                    <a class="pop-up-button" href="#form-main">OK</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grey-comments-title">Comentários mais recentes</div>
+                <div class="comments">
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-1a72b2d81127c.png" alt="Mónica"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Mónica</span> <span class="dot"></span> <span class="time">hoje</span></div>
+                            <p class="comment-text">Ótimos resultados. Eu admiro!!!! &lt;3</p>
+                            <img src="src/com-1-1a19936d446.png" alt="Mónica" class="comment-bottom-photo">
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-2b92ea5ee4bbe.png" alt="Sónia"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Sónia</span> <span class="dot"></span> <span class="time">hoje</span></div>
+                            <p class="comment-text">Estou a usar o Reduslim há 5 dias e já perdi 1,5 kg. Não me saí tão bem em nenhuma dieta.</p>
+                            <img src="src/comm3.jpg" class="comment-bottom-photo">
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-3f401892a9ca7.png" alt="Isa"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Isa</span> <span class="dot"></span> <span class="time">hoje</span></div>
+                            <p class="comment-text">Estava principalmente preocupada com o aspeto da saúde. Desde que perdi 20 kg com ele, tenho finalmente uma tensão arterial normal.</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-48d4a89328056.png" alt="Nádia"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Nádia</span> <span class="dot"></span> <span class="time">hoje</span></div>
+                            <p class="comment-text">Este método é brilhante. Não tinha tal aspeto na minha barriga, mesmo quando ia ao ginásio 3 x por semana.</p>
+                            <img src="src/comm8.jpg" class="comment-bottom-photo">
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-561fe357c2ab8.png" alt="Tiago"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Tiago</span> <span class="dot"></span> <span class="time">hoje</span></div>
+                            <p class="comment-text">Buuuuuu, e eu tinha uma esposa tão adorável, carnuda e bem alimentada. E onde está agora o meu pãozinho</p>
+                            <img src="src/com-6-16311ffd0c5.png" alt="Żona Bartosza" class="comment-bottom-photo">
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-68f16457fb87f.png" alt="Joana"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Joana </span><span class="dot"></span> <span class="time">hoje</span></div>
+                            <p class="comment-text">@Tiago habitue-se! xD A mulher será saudável durante mais tempo para si 😉 E pode agora usar calções XS, mas o seu coração ainda é XXL! &lt;3</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-7b9151ddd55b0.png" alt="Sara"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Sara</span> <span class="dot"></span> <span class="time">hoje</span></div>
+                            <p class="comment-text">Quem me dera que isto tivesse começado há cerca de 5 anos quando ganhei 20 quilos após o meu acidente de carro. Deveriam estar a entregar isto a convalescentes em clínicas como medida preventiva contra o crescimento de gordura. A sério!</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-8babad100737b.png" alt="Béatrice"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Laura</span> <span class="dot"></span> <span class="time">hoje</span></div>
+                            <p class="comment-text">Acabei de perder peso com este tratamento há 3 meses atrás e desde então o peso não se alterou. Perdi 21 kg. Por isso, recomendo-o.</p>
+                            <img src="src/com-11-1ed0b02672.png" alt="Tomasz Tkaczyk" class="comment-bottom-photo">
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-9732af6800a18.png" alt="Carla"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Carla</span> <span class="dot"></span> <span class="time">ontem</span></div>
+                            <p class="comment-text">Estou a estudar para ser nutricionista, e já há um burburinho entre os professores sobre este produto. Uma coisa que posso dizer com toda a certeza é que a composição é excelente e consegui-o a metade do preço.</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-10edc01ab6d0b.png" alt="Nuno"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Nuno</span> <span class="dot"></span> <span class="time">ontem</span></div>
+                            <p class="comment-text">E também é adequado para os homens?</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-1126f09888fa5.png" alt="Miguel"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Miguel</span> <span class="dot"></span> <span class="time">ontem</span></div>
+                            <p class="comment-text">E como! Tinha uma barriga como um tambor, e após 8 semanas já não havia vestígios dela.</p>
+                            <img src="src/com-13-16858a9ab3.png" alt="Ève Jarre" class="comment-bottom-photo">
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-12bd0cf211453.png" alt="Filipa"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Filipa</span> <span class="dot"></span> <span class="time">ontem</span></div>
+                            <p class="comment-text">A minha mãe pós-menopausa não se conseguiu livrar do seu "pneu" por nada. Hoje é a 2ª semana que ela o tem usado e já se pode ver que a sua barriga se achatou lindamente.</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-13369bbcb5c6e.png" alt="Ève Jarre"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Carolina</span> <span class="dot"></span> <span class="time">ontem</span></div>
+                            <p class="comment-text">Vestia XXL, baixei a M, às vezes S. Recomendo Reduslim.</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-photo"><img src="src/com-1410c2348240a.png" alt="Olga"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Olga</span> <span class="dot"></span> <span class="time">ontem</span></div>
+                            <p class="comment-text">Isto é, antes de mais, super fácil de aplicar. Não precisa de qualquer preparação, exercícios, mexer nas panelas. Não mudei nada na minha dieta e tenho metade do peso.</p>
+                            <img src="src/comm1.jpg" class="comment-bottom-photo">
+                        </div>
+                    </div>
+                    <div class="comment last-comment">
+                        <div class="comment-photo"><img src="src/com-15a7b876d5ec3.png" alt="Diogo Santos"></div>
+                        <div class="comment-desc">
+                            <div class="comment-author"><span class="author">Diogo Santos</span> <span class="dot"></span> <span class="time">ontem</span></div>
+                            <p class="comment-text">Oh, com uma senhora tão bela e formosa é que todos gostariam de namorar.</p>
+                        </div>
+                    </div>
+                    <div class="add-comment-box d-none d-md-block">
+                        <div class="add-comment-title">Adicionar comentário</div>
+                        <div class="add-comment-line"><span class="long-line"></span> <span class="short-line"></span></div>
+                        <div class="add-comment-form">
+                            <div class="add-comment-form-avatar"><img src="src/avatar1a4496176b0.svg" alt="Awatar"></div>
+                            <div class="add-comment-form-content">
+                                <input placeholder="O seu nome" class="name-input">
+                                <textarea name="text" placeholder="Conteúdo do seu comentário" class="name-textarea"></textarea>
+                                <div class="send"><span class="attachment">Adicionar anexo</span><span class="send-comment">Enviar</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="coupon">
+                        <p class="coupon-title d-md-none">50% de desconto para os nossos leitores</p>
+                        <div class="product"><img src="src/product.png" style="width: 100%" alt="Apetin Stop !"></div>
+                        <div class="coupon-desc">
+                            <p class="coupon-title d-none d-md-block">50% de desconto para os nossos leitores</p>
+                            <p class="coupon-text">Utilize o nosso LINK EXCLUSIVO abaixo e receba hoje um desconto de 50% na fórmula Reduslim</p>
+                            <a href="#form-main" class="coupon-cta cta">Receba o revolucionário tratamento de emagrecimento Reduslim com desconto e comece a sua transformação &gt;&gt;&gt;</a>
+                            <p class="coupon-red-alert">
+                                A promoção especial é válida até
+                                <span class="date">
+                                    <script>
+                                        (() => {
+                                            document.write((new Date()).toLocaleDateString('es', {
+                                                "dateStyle": "short"
+                                            }))
+                                        })();
+                                    </script>!
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <aside class="aside d-none d-lg-block">
+                <div class="author-box">
+                    <div class="author">
+                        <div class="author-photo"><img src="src/author2f3fb377197.png" alt="Daniela Rosa"></div>
+                        <div class="author-name"><span>Autor da Entrevista:</span> <span>Daniela Rosa</span></div>
+                    </div>
+                    <div class="author-desc">
+                        <p class="author-text">Especialista em perder peso em harmonia com a natureza. Entusiasta de uma cozinha saudável, adaptada às estações do ano. Defensora da cura... com alimentos. Durante os últimos 16 anos tem ajudado pessoas em crise de peso. Ela gosta particularmente de trabalhar com pessoas que tenham tido pelo menos 6 tentativas falhadas de perder peso. Coautora de programas sobre mitos nutricionais. Autora de inúmeros artigos sobre os efeitos dos extratos naturais na queima de calorias.</p>
+                        <a href="#form-main"><img src="src/buttonsda63808f4c.png" class="social-buttons" alt="Facebook"></a>
+                    </div>
+                </div>
+                <div class="popular">
+                    <div class="popular-title">Entradas populares</div>
+                    <div class="news">
+                        <a href="#form-main">
+                            <div class="news-photo"><img src="src/aside-181db5a4e38.png" alt="Emagrecimento"></div>
+                            <div class="news-desc">
+                                <p class="news-text">2 dias para perder peso? Você pode fazê-lo!</p>
+                                <span class="news-category">Emagrecimento</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="news">
+                        <a href="#form-main">
+                            <div class="news-photo"><img src="src/aside-2848bba1e67.png" alt="Emagrecimento"></div>
+                            <div class="news-desc">
+                                <p class="news-text">A celulite resistente não tem qualquer hipótese com isto</p>
+                                <span class="news-category">Emagrecimento</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="news">
+                        <a href="#form-main">
+                            <div class="news-photo"><img src="src/aside-32cbf32e9e8.png" alt="Emagrecimento"></div>
+                            <div class="news-desc">
+                                <p class="news-text">Como emagrecer a barriga e não... o busto?</p>
+                                <span class="news-category">Emagrecimento</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="news">
+                        <a href="#form-main">
+                            <div class="news-photo"><img src="src/aside-4502fd69e2f.png" alt="Emagrecimento"></div>
+                            <div class="news-desc">
+                                <p class="news-text">As 3 mentiras mais comuns são as dos nutricionistas</p>
+                                <span class="news-category">Aconselhamento</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#form-main" class="cta-aside cta">
+                    <img src="src/cta-bg3ffc243a0e5.png" alt="" class="cta-bg">
+                    <div class="top">Oferta especial</div>
+                    <img src="src/product.png" alt="" class="product">
+                    <div class="bottom">Desconto -50% <span>obtenha um pacote</span></div>
+                </a>
+            </aside>
+        </div>
+        <footer class="footer">
+            <div class="footer-wrapper container">
+                <div class="footer-desc">
+                    <div class="footer-nav">
+                        <div class="footer-nav-item d-none d-md-block"><img src="src/arrowd8a9a85ba85f.png" alt="Arrow"></div>
+                        <div class="footer-nav-item"><a href="#form-main"><strong>Notícias</strong></a></div>
+                        <div class="footer-nav-item"><a href="#form-main">Eventos</a></div>
+                        <div class="footer-nav-item"><a href="#form-main">Inovações</a></div>
+                        <div class="footer-nav-item"><a href="#form-main">Conferências</a></div>
+                        <div class="footer-nav-item"><a href="#form-main">Do ponto de vista de um especialista</a></div>
+                    </div>
+                    <div class="footer-text">Os dados pessoais do artigo foram alterados devido à obrigação de os proteger. Os efeitos do tratamento dependem da predisposição individual do utilizador e podem variar. A informação sobre os efeitos e a rapidez do tratamento indicado no artigo não constitui uma garantia por parte do vendedor das propriedades do produto. O texto é material publicitário</div>
+                </div>
+                <div class="footer-logo">
+                    <div class="footer-logo-photo"><img src="src/logoc5453e1b8d7e0.png" alt="Área da saúde"> <span class="logo-text">Área da<br><span>saúde</span></span></div>
+                    <div class="footer-socials"><a href="#form-main"><img src="src/facebookb6af445cb.png" alt="Facebook"> </a><a href="#form-main"><img src="src/instagramdfdf8210.png" alt="Instagram"> </a><a href="#form-main"><img src="src/pinterest2fe2e7e4.png" alt="Pinterest"></a></div>
+                </div>
+            </div>
+        </footer>
+        <div class="thank-you">
+            <img src="src/close7a8d81c2b90c.png" alt="Close" class="close">
+            <div class="thank-you-box">
+                <p>Obrigado pelo seu comentário</p>
+                <p>Será publicado pelo moderador</p>
+            </div>
+        </div>
+        <!-- footer scripts -->
+        <style>.footer_legal {
+                text-align: center;
+                padding: 10px 10px 15px
+            }
+            .footer_legal .footer_legal_txt {
+                font-size: 12px;
+                line-height: 1.2;
+                color: #6d6d6d
+            }
+        </style>
+        <div class="footer_legal">
+            <p class="footer_legal_txt">O administrador não verifica se as opiniões disponíveis no website provêm de consumidores que utilizaram ou compraram o produto.</p>
+        </div>
+ <div class="demon_popup">
+        <div class="demon_overflow"></div>
+        <div class="demon_popup_body">
+            <span class="demon_close"></span>
+            <h4 class="demon_popup_title">Você é de <span class="cityFrom">Portugal</span>? Espere!</h4>
+            <img src="src/product.png" alt="" style="width:28%">
+            <p>Uma oferta especial limitada ainda é válida para si.</p>
+            <p>Apresse-se para participar no programa e obtenha Reduslim na promoção por <span class="new_price_val">39</span> <span class="new_price_cur">EUR</span><span style="color:#fff !important">!</span></p>
+            <a href="#form-main" class="popup_btn to_form">SAIBA MAIS</a>
+        </div>
+    </div>
+        <script src="src/comment-.js" defer=""></script>
+        <script src="src/doors.js" defer=""></script>
+		  <script src="src/generato.js" defer=""></script>
+		       <script>
+                                        $('a').addClass('to_form');
+
+                                        $(".to_form").on("touchend, click", function (e) {
+                                            e.preventDefault();
+                                            $('body,html').animate({
+                                                scrollTop: $('#form-main').offset().top - 25
+                                            }, 400);
+                                        });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-url-parser/2.3.1/purl.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+        <script src="price.js"></script>
+    </body>
+
+</html>
